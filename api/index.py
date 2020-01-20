@@ -44,7 +44,7 @@ def getDT(file):
         na_values='-',
         header=None,
         usecols=[0, 3, 4, 7], 
-        #nrows=1500000,
+        nrows=1500000,
         names=['ip', 'time', 'request', 'referer'],
         converters={'time': parse_datetime,
                     'request': parse_str,
