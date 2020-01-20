@@ -83,3 +83,18 @@ Prend en paramètres le dataFrame
 def getIps(data):
     temp = data.groupby(['ip']).size().reset_index(name='counts')
     return temp[['ip','counts']].sort_values(by='counts', ascending=False)
+
+
+'''
+Retourne une vue du trafic selon une fenêtre de temps
+'''
+def getView(data, date1, date2):
+    print(type(date1))
+    response = {}
+    temp = data[(data['time'] >= date1) & (data['time'] <= date2)]
+    response['nbrHits'] = temp['ip'].count() # nombre total de hits http
+    response['maxIp'] = temp['ip'].value_counts().idxmax() # L'ip ayant fait le plus de hits
+    response['maxHits'] = temp['request'].value_counts().idxmax() # la ressource la plus accèder
+
+    return response
+

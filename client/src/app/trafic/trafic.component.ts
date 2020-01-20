@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TraficService } from '../trafic.service';
 declare var $: any;
 
 @Component({
@@ -8,14 +9,23 @@ declare var $: any;
 })
 export class TraficComponent implements OnInit {
 
-  constructor() { }
+  constructor(private traficService: TraficService) { }
+
+  private date1 = '2015-12-12 18:25:11+01:00';
+  private date2 = '2015-12-12 20:25:11+01:00';
+
+  trafic = [];
 
   ngOnInit() {
-
-    $('.datepicker').datetimepicker({
-      format: 'DD-MM-YYYY HH:mm:ss'
-    });
-
+    this.traficService.getTrafic(this.date1, this.date2)
+      .subscribe(
+        (data: string) => {
+          this.trafic = JSON.parse(data);
+        },
+        err => {
+          console.error(err);
+        }
+      );
   }
 
 }

@@ -11,12 +11,13 @@ export class TraficService {
 
   private uri = 'http://127.0.0.1:5000/';
 
+  // retourne la liste des ip's triées par ordre décroissant de hits http
   getIps() {
     return this.http.get(this.uri + 'ips');
   }
 
-
-  getHits(date1, date2) {
-    return this.http.get(this.uri + 'httpHits/' + date1 + '/' + date2);
+  // retourne une vue du trafic selon une fenêtre de temps
+  getTrafic(date1, date2) {
+    return this.http.get(this.uri + 'trafic/' + date1 + '/' + date2);
   }
 }

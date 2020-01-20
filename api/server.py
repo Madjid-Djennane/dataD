@@ -18,10 +18,9 @@ def hello_world():
     
 
 # Retourne les hits http selon une fenêtre de temps
-@app.route('/httpHits/<date1>/<date2>', methods=['GET'])
-def httpHits(date1,date2):
-    temp = getHttpHits(data, date1, date2).to_json(orient='values')
-    print(temp)
+@app.route('/trafic/<date1>/<date2>', methods=['GET'])
+def trafic(date1,date2):
+    temp = getHttpHits(data, date1,date2).to_json(orient='values')
     response = jsonify(temp)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
